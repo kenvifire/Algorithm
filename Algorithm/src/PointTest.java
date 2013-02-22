@@ -54,4 +54,57 @@ public class PointTest extends TestCase {
 		assertEquals(1, p.compareTo(q));
 	}
 
+	// @Test
+	// public void testLineCompare() {
+	// SET<Line> set = new SET<Line>();
+	// Point start = new Point(1000, 17000);
+	// Point end = new Point(29000, 17000);
+	// Line line = new Line(start, end);
+	// set.add(line);
+	//
+	// Point start1 = new Point(1000, 17000);
+	// Point end1 = new Point(29000, 17000);
+	// Line line1 = new Line(start1, end1);
+	// assertEquals(true, set.contains(line1));
+	// }
+
+	private static class Line implements Comparable<Line> {
+		private Point start, end;
+
+		public Line(Point start, Point end) {
+
+			this.start = start;
+			this.end = end;
+		}
+
+		public String toString() {
+			return start + "->" + end;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null)
+				return false;
+			Line that = (Line) obj;
+			if (this.start.compareTo(that.start) == 0
+					&& this.end.compareTo(that.end) == 0) {
+				return true;
+			}
+			return false;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Comparable#compareTo(java.lang.Object)
+		 */
+		@Override
+		public int compareTo(Line o) {
+			if (this.equals(o))
+				return 0;
+			return 1;
+		}
+
+	}
+
 }

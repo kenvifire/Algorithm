@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 2013-2-19
@@ -13,12 +15,13 @@ import java.util.Comparator;
  * 
  */
 public class Fast {
-	private static SET<Line> set = new SET<Line>();
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Set<Line> set = new HashSet<Line>();
+
 		StdDraw.setXscale(0, 32768);
 		StdDraw.setYscale(0, 32768);
 		StdDraw.show(0);
@@ -30,14 +33,20 @@ public class Fast {
 			int x = in.readInt();
 			int y = in.readInt();
 			Point p = new Point(x, y);
+			p.draw();
 
 			points[i] = p;
 		}
-		fast(points);
+		fast(set, points);
+		for (Line line : set) {
+			// System.out.println("draw");
+			line.start.drawTo(line.end);
+		}
 		StdDraw.show(0);
+
 	}
 
-	private static void fast(Point[] points) {
+	private static void fast(Set<Line> set, Point[] points) {
 		if (points.length < 4)
 			return;
 
@@ -52,7 +61,6 @@ public class Fast {
 			int j = 1;
 
 			while (true) {
-				// System.out.println(j);
 				if (j > points.length - 2)
 					break;
 				int count = 2;
@@ -61,28 +69,21 @@ public class Fast {
 
 					count++;
 					j++;
-					if (j > points.length - 3)
+					if (j > points.length - 2)
 						break;
 				}
 				if (count >= 4) {
-					dumpPoints(points, 0, start, j);
+					dumpPoints(points, 0, start, j, set);
 				}
 				j++;
 			}
-			// removeFristPoint(points);
+
 		}
 
 	}
 
-	// private static void exchange(Point[] points, int i, int j) {
-	//
-	// Point tmp = points[i];
-	// points[i] = points[j];
-	// points[j] = tmp;
-	//
-	// }
-
-	private static void dumpPoints(Point[] points, int origin, int i, int j) {
+	private static void dumpPoints(Point[] points, int origin, int i, int j,
+			Set<Line> set) {
 
 		Point[] aup = new Point[j - i + 2];
 		aup[0] = points[origin];
@@ -96,36 +97,15 @@ public class Fast {
 			return;
 		}
 		set.add(line);
-		System.out.println(line);
 
-		// StdOut.printf(points[origin] + "->");
 		for (int k = 0; k < aup.length - 1; k++) {
 			StdOut.printf(aup[k] + " -> ");
 		}
 		StdOut.printf(aup[aup.length - 1] + "\n");
-		aup[0].drawTo(aup[aup.length - 1]);
-		for (int k = 1; k < aup.length - 2; k++) {
-			aup[k].draw();
-
-		}
 
 	}
 
-	// public static void removeFristPoint(Point[] points) {
-	// for (int i = 0; i < points.length - 1; i++) {
-	// points[i] = points[i + 1];
-	// }
-	// }
-
-	//
-	// public static void dumpPointDatas(Point[] points) {
-	// for (int i = 1; i < points.length; i++) {
-	//
-	// }
-	//
-	// }
-
-	private static class Line implements Comparable<Line> {
+	private static class Line {
 		private Point start, end;
 
 		public Line(Point start, Point end) {
@@ -147,19 +127,15 @@ public class Fast {
 					&& this.end.compareTo(that.end) == 0) {
 				return true;
 			}
+			// System.out.println("compare" + this + "->" + that);
 			return false;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Comparable#compareTo(java.lang.Object)
-		 */
 		@Override
-		public int compareTo(Line o) {
-			if (this.equals(o))
-				return 0;
-			return 1;
+		public int hashCode() {
+			int hashCode = start.hashCode() * 3 + end.hashCode() * 13;
+			return hashCode;
+
 		}
 
 	}

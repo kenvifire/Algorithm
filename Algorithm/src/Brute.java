@@ -26,7 +26,7 @@ public class Brute {
 			int x = in.readInt();
 			int y = in.readInt();
 			Point p = new Point(x, y);
-			// p.draw();
+			p.draw();
 			points[i] = p;
 		}
 		brute(points);
@@ -47,8 +47,6 @@ public class Brute {
 									+ " -> " + points[k] + " -> " + points[n]
 									+ "\n");
 							points[i].drawTo(points[n]);
-							points[j].draw();
-							points[k].draw();
 
 						}
 					}
