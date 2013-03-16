@@ -31,6 +31,14 @@ public class Solver {
 
 		}
 
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < N; i++)
+				for (int j = 0; j < N; j++)
+					sb.append(board.get(i, j));
+
+			return sb.toString();
+		}
 	}
 
 	private void sovle() {
@@ -43,14 +51,17 @@ public class Solver {
 				int moves = 1;
 				if (prev != null) {
 					moves = prev.moves + 1;
+					System.out.println(moves);
 				}
 				TreeNode node = new TreeNode(moves, bd, searchNode);
 				if (prev == null) {
 					minPQ.insert(node);
+					// System.out.println(node);
 				} else if (prev != null) {
 
 					boolean tag = false;
 					while (prev != null) {
+						// System.out.println("checking...");
 						if (prev.board.equals(bd)) {
 							tag = true;
 							break;
@@ -59,7 +70,9 @@ public class Solver {
 					}
 					if (!tag) {
 						minPQ.insert(node);
+						// System.out.println(node);
 					}
+					// System.out.println("check done");
 				}
 
 			}
@@ -72,6 +85,9 @@ public class Solver {
 		TreeNode initialNode = new TreeNode(0, initial, null);
 		minPQ = new MinPQ<Solver.TreeNode>(N, new BoardComparator());
 		minPQ.insert(initialNode);
+
+		// solve
+		sovle();
 	}
 
 	// is the initial board solvable?
@@ -91,7 +107,7 @@ public class Solver {
 			return -1;
 		TreeNode best = minPQ.min();
 		if (best.board.isGoal())
-			return best.moves;
+			return ((List) solution()).size() - 1;
 		return -1;
 
 	}
@@ -126,17 +142,14 @@ public class Solver {
 		// solve the puzzle
 		Solver solver = new Solver(initial);
 
-		// solve
-		solver.sovle();
-
 		// print solution to standard output
-		if (!solver.isSolvable())
-			StdOut.println("No solution possible");
-		else {
-			StdOut.println("Minimum number of moves = " + solver.moves());
-			for (Board board : solver.solution())
-				StdOut.println(board);
-		}
+		// if (!solver.isSolvable())
+		// StdOut.println("No solution possible");
+		// else {
+		// StdOut.println("Minimum number of moves = " + solver.moves());
+		// for (Board board : solver.solution())
+		// StdOut.println(board);
+		// }
 	}
 
 	private class BoardComparator implements Comparator<TreeNode> {

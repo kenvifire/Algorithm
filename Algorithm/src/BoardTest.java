@@ -28,6 +28,10 @@ public class BoardTest extends TestCase {
 		bd = new Board(initial);
 		assertEquals(5, bd.hamming());
 		assertEquals(10, bd.manhattan());
+		//
+		initial = new int[][] { { 5, 8, 7 }, { 1, 4, 6 }, { 3, 0, 2 } };
+		bd = new Board(initial);
+		assertEquals(3, bd.manhattan());
 	}
 
 	@Test
@@ -83,5 +87,16 @@ public class BoardTest extends TestCase {
 		Board result = new Board(initial);
 		assertEquals(result.equals(twin), true);
 
+	}
+
+	@Test
+	public void testEq() {
+		// reflexive
+		int[][] initial = new int[][] { { 1, 2 }, { 3, 0 } };
+		Board bd1 = new Board(initial);
+		initial = new int[][] { { 1, 2 }, { 3, 0 } };
+		// symmetric
+		assertEquals(false, bd1.equals(null));
+		assertEquals(false, bd1.equals(""));
 	}
 }

@@ -24,6 +24,11 @@ public class Board {
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
 				this.blocks[i][j] = initial[i][j];
+
+	}
+
+	public int get(int i, int j) {
+		return blocks[i][j];
 	}
 
 	// board dimension N
@@ -51,13 +56,16 @@ public class Board {
 			for (int j = 0; j < N; j++) {
 				if (blocks[i][j] != 0) {
 					int num = blocks[i][j];
-					int goal = i * N + j + 1;
-					int dis = goal - num;
-					if (dis < 0)
-						dis = -dis;
-					distance += dis / N;
-					distance += dis % N;
+
+					int goalx = (num - 1) / N;
+					int goaly = (num - 1) % N;
+
+					distance += (Math.abs(goaly - j) + Math.abs(goalx - i));
+
 					// distance += Math.abs(goal - num);
+					// System.out.println(num + ","
+					// + (Math.abs(goaly - i) + Math.abs(goalx - j)) + ":"
+					// + goalx + "," + goaly);
 				}
 			}
 		}
@@ -100,14 +108,19 @@ public class Board {
 	public boolean equals(Object y) {
 		if (y == null)
 			return false;
-		Board that = (Board) y;
-		if (this.N != that.N)
+		if (y instanceof Board) {
+			Board that = (Board) y;
+			if (this.N != that.N)
+				return false;
+			for (int i = 0; i < N; i++)
+				for (int j = 0; j < N; j++)
+					if (blocks[i][j] != that.blocks[i][j])
+						return false;
+			return true;
+		} else {
 			return false;
-		for (int i = 0; i < N; i++)
-			for (int j = 0; j < N; j++)
-				if (blocks[i][j] != that.blocks[i][j])
-					return false;
-		return true;
+		}
+
 	}
 
 	// all neighboring boards
