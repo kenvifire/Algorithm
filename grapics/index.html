@@ -1,0 +1,92 @@
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+<div align="center">
+	<canvas id="myCanvas" width="400" height="300">
+	</canvas>
+</div>
+</body>
+	<script type="text/javascript">
+		function drawRect(ctx,x,y,width,height){
+			ctx.moveTo(x,y);
+			ctx.lineTo(x+width,y);
+			ctx.lineTo(x+width,y+height);
+			ctx.lineTo(x,y+height);
+			ctx.lineTo(x,y);
+			ctx.stroke();
+		}
+		function drawNum(ctx,start,height){
+			var oldFillStyle = ctx.fillStyle;
+			ctx.fillStyle="#000000";
+			console.log(ctx.fillStyle);	
+			
+			ctx.fillRect(start*10,300-height,10,height);	
+			
+			ctx.fillStyle = oldFillStyle;		
+			
+		}
+		function getRandomArray(){
+			var nums =[];
+			var randNumMin = 1;
+			var randNumMax = 100;
+			for(var i=0;i<20;i++){
+				var randInt = (Math.floor(Math.random()*(randNumMax-randNumMin))+randNumMin);
+				nums.push(randInt);
+			}
+			return nums;
+		}
+		function sort(nums){
+			for(var i=0;i<nums.length;i++)
+				for(var j=i+1;j<nums.length;j++)
+					if(nums[i]>nums[j]){
+						sleep(500);
+						swap(nums,i,j);	
+						draw(nums);
+					}
+		}
+		
+		function swap(num,i,j){
+			var tmp = num[i];
+			num[i] = num[j];
+			num[j]= tmp;
+		}	
+		function sleep(d){
+  			for(var t = Date.now();Date.now() - t <= d;);
+		}
+		function draw(nums){
+			ctx.clearRect(0,0,400,300);
+			drawRect(ctx,0,0,400,300);
+			for(var i =0;i<randNum.length;i++){
+				drawNum(ctx,i,randNum[i]);
+			}
+	
+		}
+	
+		var canvas = document.getElementById("myCanvas");
+		var ctx = canvas.getContext("2d");
+		ctx.fillStyle="#ffffff";
+		ctx.fillRect(0,0,400,300);
+		/*	
+	    ctx.moveTo(0,0);
+		ctx.lineTo(0,300);
+		ctx.lineTo(400,300);
+		ctx.lineTo(400,0);
+		ctx.lineTo(0,0);
+		ctx.stroke();		
+		*/
+		drawRect(ctx,0,0,400,300);
+		var randNum = getRandomArray();
+		for(var i =0;i<randNum.length;i++){
+			drawNum(ctx,i,randNum[i]);
+		}
+		drawNum(ctx,1,200);	
+		
+		sort(randNum);
+		console.log(randNum);	
+
+		
+	</script>
+
+</html>
