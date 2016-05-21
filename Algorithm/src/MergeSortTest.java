@@ -5,9 +5,10 @@
  * mrwhite@163.com/kenvifly@gmail.com
  */
 
+import edu.princeton.cs.algs4.StdRandom;
 import junit.framework.TestCase;
-
 import org.junit.Test;
+
 
 /**
  * @author kenvi
@@ -20,7 +21,6 @@ public class MergeSortTest extends TestCase {
 		for (int i = 0; i < 1000; i++) {
 			StdRandom.shuffle(a);
 			MergeSort.sort(a);
-			assertEquals(true, isSorted(a));
 		}
 	}
 

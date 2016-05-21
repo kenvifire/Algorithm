@@ -1,3 +1,6 @@
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
+
 /**
  * Created by hannahzhang on 15/3/29.
  */

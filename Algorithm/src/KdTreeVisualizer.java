@@ -1,3 +1,6 @@
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.StdDraw;
+
 /*************************************************************************
  * Compilation: javac KdTreeVisualizer.java Execution: java KdTreeVisualizer
  * Dependencies: StdDraw.java Point2D.java KdTree.java

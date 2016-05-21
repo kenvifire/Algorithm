@@ -1,6 +1,7 @@
 package kdtree;
 
 
+import edu.princeton.cs.algs4.StdDraw;
 
 /*************************************************************************
  * Compilation: javac KdTreeVisualizer.java Execution: java KdTreeVisualizer
@@ -14,20 +15,20 @@ package kdtree;
 public class KdTreeVisualizer {
 
 	public static void main(String[] args) {
-		StdDraw.show(0);
-		KdTree kdtree = new KdTree();
-		while (true) {
-			if (StdDraw.mousePressed()) {
-				double x = StdDraw.mouseX();
-				double y = StdDraw.mouseY();
-				// System.out.printf("%8.6f %8.6f\n", x, y);
-				MyPoint2D p = new MyPoint2D(x, y);
-				kdtree.insert(p);
-				StdDraw.clear();
-				kdtree.draw();
-			}
-			StdDraw.show(50);
-		}
+//		StdDraw.show(0);
+//		KdTree kdtree = new KdTree();
+//		while (true) {
+//			if (StdDraw.mousePressed()) {
+//				double x = StdDraw.mouseX();
+//				double y = StdDraw.mouseY();
+//				// System.out.printf("%8.6f %8.6f\n", x, y);
+//				MyPoint2D p = new MyPoint2D(x, y);
+//				kdtree.insert(p);
+//				StdDraw.clear();
+//				kdtree.draw();
+//			}
+//			StdDraw.show(50);
+//		}
 
 	}
 }

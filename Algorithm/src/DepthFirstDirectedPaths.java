@@ -24,6 +24,11 @@
  *
  *************************************************************************/
 
+import edu.princeton.cs.algs4.Digraph;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.StdOut;
+
 /**
  *  The <tt>DepthFirstDirectedPaths</tt> class represents a data type for finding
  *  directed paths from a source vertex <em>s</em> to every
