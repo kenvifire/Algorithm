@@ -54,46 +54,46 @@ public class GrahamTest extends TestCase {
 		graham.findSolution();
 	}
 
-	private Point2D[] getPoints(String file) throws Exception {
-		List<Point2D> points = new ArrayList<Point2D>();
+	private MyPoint2D[] getPoints(String file) throws Exception {
+		List<MyPoint2D> points = new ArrayList<MyPoint2D>();
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				new FileInputStream(file)));
 		String line = null;
 		while ((line = br.readLine()) != null) {
-			Point2D p = new Point2D(line.split(" ")[0], Double.parseDouble(line
+			MyPoint2D p = new MyPoint2D(line.split(" ")[0], Double.parseDouble(line
 					.split(" ")[1]), Double.parseDouble(line.split(" ")[2]));
 			points.add(p);
 		}
 		br.close();
-		return points.toArray(new Point2D[0]);
+		return points.toArray(new MyPoint2D[0]);
 	}
 
 	@Test
 	public void testComparatorLT() {
-		Point2D d = new Point2D("D", 1.0, 0.0);
-		Point2D a = new Point2D("A", 6.0, 2.0);
-		Point2D g = new Point2D("G", 8.0, 3.0);
+		MyPoint2D d = new MyPoint2D("D", 1.0, 0.0);
+		MyPoint2D a = new MyPoint2D("A", 6.0, 2.0);
+		MyPoint2D g = new MyPoint2D("G", 8.0, 3.0);
 		assertEquals(-1, d.POLOR_ORDER.compare(a, g));
 
 	}
 
 	@Test
 	public void testComparatorGT() {
-		Point2D d = new Point2D("D", 1.0, 0.0);
-		Point2D a = new Point2D("A", 6.0, 2.0);
-		Point2D g = new Point2D("G", 8.0, 3.0);
+		MyPoint2D d = new MyPoint2D("D", 1.0, 0.0);
+		MyPoint2D a = new MyPoint2D("A", 6.0, 2.0);
+		MyPoint2D g = new MyPoint2D("G", 8.0, 3.0);
 		assertEquals(1, d.POLOR_ORDER.compare(g, a));
 
 	}
 
 	@Test
 	public void testSort() {
-		Point2D d = new Point2D("D", 1.0, 0.0);
-		Point2D a = new Point2D("A", 6.0, 2.0);
-		Point2D g = new Point2D("G", 8.0, 3.0);
-		Point2D[] ps = new Point2D[] { a, d, g };
+		MyPoint2D d = new MyPoint2D("D", 1.0, 0.0);
+		MyPoint2D a = new MyPoint2D("A", 6.0, 2.0);
+		MyPoint2D g = new MyPoint2D("G", 8.0, 3.0);
+		MyPoint2D[] ps = new MyPoint2D[] { a, d, g };
 		d.sort(ps);
-		for (Point2D p : ps) {
+		for (MyPoint2D p : ps) {
 			System.out.println(p.getName());
 		}
 	}

@@ -13,15 +13,15 @@ import java.util.List;
  * 
  */
 public class Graham {
-	private Point2D[] points;
+	private MyPoint2D[] points;
 
-	public Graham(Point2D[] points) {
+	public Graham(MyPoint2D[] points) {
 		this.points = points;
 	}
 
 	public void dumpPoints() {
 		System.out.println("-------------dumping----------------");
-		for (Point2D poiont : points) {
+		for (MyPoint2D poiont : points) {
 			System.out.println(poiont.getName() + "(" + poiont.getX() + ","
 					+ poiont.getY() + ")");
 		}
@@ -37,7 +37,7 @@ public class Graham {
 		}
 		//
 		// exchange origin and first point
-		Point2D temp = points[0];
+		MyPoint2D temp = points[0];
 		points[0] = points[origin];
 		points[origin] = temp;
 
@@ -46,16 +46,16 @@ public class Graham {
 		// dumping points
 		// dumpPoints();
 
-		List<Point2D> solution = new ArrayList<Point2D>();
+		List<MyPoint2D> solution = new ArrayList<MyPoint2D>();
 		for (int i = 0; i < points.length; i++) {
 			solution.add(points[i]);
 			// System.out.println("adding point :" + points[i].getName());
 			if (solution.size() < 3)
 				continue;
 
-			List<Point2D> discard = new ArrayList<Point2D>();
+			List<MyPoint2D> discard = new ArrayList<MyPoint2D>();
 			for (int j = 1; j < solution.size() - 1; j++) {
-				if (Point2D.ccw(solution.get(j - 1), solution.get(j),
+				if (MyPoint2D.ccw(solution.get(j - 1), solution.get(j),
 						solution.get(solution.size() - 1)) <= 0) {
 					discard.add(solution.get(j));
 					System.out.println();
